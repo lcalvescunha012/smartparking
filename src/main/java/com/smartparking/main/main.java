@@ -1,13 +1,13 @@
-package com.smartparking.smartparking;
+package com.smartparking.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SmartparkingApplication {
+public class main {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SmartparkingApplication.class, args);
+		SpringApplication.run(main.class, args);
 	}
 
 }
