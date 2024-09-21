@@ -1,10 +1,12 @@
 package com.smartparking.controller;
 
 import com.smartparking.dto.ZonaDTO;
+import com.smartparking.dto.ZonaPutAndPostDTO;
 import com.smartparking.service.ZonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class ZonaController {
 
+    @Autowired
     private ZonaService zonaService;
 
     @Operation(description = "Retorna a lista de todas as zonas cadastradas.")
@@ -31,15 +34,15 @@ public class ZonaController {
         return ResponseEntity.ok(zonaService.findById(id));
     }
 
-    @Operation(description = "Cadastra uma nova zona.")
+    @Operation(description = "Cadastre uma nova zona.")
     @PostMapping
-    public ResponseEntity<ZonaDTO> save(@Valid @RequestBody ZonaDTO zonaDTO) {
+    public ResponseEntity<ZonaDTO> save(@Valid @RequestBody ZonaPutAndPostDTO zonaDTO) {
         return ResponseEntity.status(HttpStatusCode.valueOf(HttpStatus.CREATED.value())).body(zonaService.save(zonaDTO));
     }
 
-    @Operation(description = "Atualiza a zona cadastrada.")
+    @Operation(description = "Atualize a zona cadastrada.")
     @PutMapping("/{id}")
-    public ResponseEntity<ZonaDTO> update(@PathVariable String id, @Valid @RequestBody ZonaDTO zonaDTO) {
+    public ResponseEntity<ZonaDTO> update(@PathVariable String id, @Valid @RequestBody ZonaPutAndPostDTO zonaDTO) {
         return ResponseEntity.ok(zonaService.update(id, zonaDTO));
     }
 
