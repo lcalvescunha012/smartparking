@@ -5,8 +5,8 @@ import com.smartparking.dto.ZonaPutAndPostDTO;
 import com.smartparking.service.ZonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ import java.util.Collection;
 @RequiredArgsConstructor
 public class ZonaController {
 
-    @Autowired
+    @NonNull
     private ZonaService zonaService;
 
     @Operation(description = "Retorna a lista de todas as zonas cadastradas.")
