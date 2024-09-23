@@ -72,7 +72,7 @@ public class ZonaService {
                 Gson gson = new Gson();
                 localizacao = gson.fromJson(result, LocalizacaoEntity.class);
             } else {
-                throw new InternalServerErrorException("Resposta vazia do serviço ViaCEP.");
+                throw new NotFoundException("Resposta vazia do serviço ViaCEP.");
             }
         } catch (IOException e) {
             throw new InternalServerErrorException("Falha ao buscar localização para o CEP: " + cepFormatado);
