@@ -13,19 +13,15 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/api/veiculo")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class VeiculoController {
 
-    //@NonNull
+    @NonNull
     private final VeiculoService veiculoService;
 
-    public VeiculoController(VeiculoService veiculoService) {
-        this.veiculoService = veiculoService;
-        System.out.println("This is controller -> " + this);
-    }
 
     @Operation(description = "Retorna veículo cadastrado.")
-    @GetMapping("/{id}")
+    @GetMapping("/{placa}")
     public ResponseEntity<VeiculoDTO> findById(@PathVariable String placa) {
         return ResponseEntity.ok(veiculoService.findById(placa));
     }
@@ -37,13 +33,13 @@ public class VeiculoController {
     }
 
     @Operation(description = "Atualiza as informações de um veículo cadastrado.")
-    @PutMapping("/{id}")
+    @PutMapping("/{placa}")
     public ResponseEntity<VeiculoDTO> update(@PathVariable String placa, @RequestBody VeiculoDTO veiculo){
         return ResponseEntity.ok(veiculoService.update(placa, veiculo));
     }
 
     @Operation(description = "Deleta veiculo cadastrado.")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{placa}")
     public ResponseEntity<Void> delete(@PathVariable String placa){
         veiculoService.delete(placa);
         return ResponseEntity.noContent().build();

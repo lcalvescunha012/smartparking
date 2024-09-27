@@ -1,4 +1,7 @@
 package com.smartparking.repository;
 
-public interface ZonaRepository {
+import com.smartparking.entities.ZonaEntity;
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface ZonaRepository extends MongoRepository<ZonaEntity, String> {
 }
