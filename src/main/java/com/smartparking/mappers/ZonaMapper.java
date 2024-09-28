@@ -11,7 +11,8 @@ public class ZonaMapper {
         return new ZonaDTO(
                 zonaEntity.getIdZona(),
                 zonaEntity.getNome(),
-                zonaEntity.getLocalizacao()
+                zonaEntity.getLocalizacao(),
+                zonaEntity.getVersion()
         );
     }
 
@@ -19,7 +20,8 @@ public class ZonaMapper {
         return new ZonaEntity(
                 zonaDTO.idZona(),
                 zonaDTO.nome(),
-                zonaDTO.localizacao()
+                zonaDTO.localizacao(),
+                zonaDTO.version()
         );
     }
 }
