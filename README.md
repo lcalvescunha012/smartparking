@@ -6,3 +6,4 @@ Registrar veículos
 Realizar pagamentos e controlar tempo de estacionamento
 
 Swagger : http://localhost:8080/swagger-ui/index.html
+Docker: Excutar o comando "docker-compose up -d", assim a aplicação irá subir e ficar disponível no localhost:8080
