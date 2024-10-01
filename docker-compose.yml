@@ -1,0 +1,38 @@
+services:
+  mongo:
+    container_name: mongodb
+    image: mongo:7.0
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: smartparking
+    networks:
+      - smartparking-network
+    volumes:
+      - smartparking-data:/data/db
+    healthcheck:
+      test: ["CMD","mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  app:
+    container_name: smartparking
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/smartparking
+    networks:
+      - smartparking-network
+
+volumes:
+  smartparking-data:
+
+networks:
+  smartparking-network:

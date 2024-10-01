@@ -1,4 +1,6 @@
 package com.smartparking.dto;
 
-public record ZonaDTO() {
+import com.smartparking.entities.LocalizacaoEntity;
+
+public record ZonaDTO(String idZona, String nome, LocalizacaoEntity localizacao, Long version) {
 }
