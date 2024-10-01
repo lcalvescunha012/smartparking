@@ -9,14 +9,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @RestControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
     private final MessageErrorEntity err = new MessageErrorEntity();
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<MessageErrorEntity> handleInvalidObjectId(MethodArgumentTypeMismatchException e) {
+
+        HttpStatus status = HttpStatus.BAD_REQUEST;
+        String error = "Invalid ObjectId format";
+
+        err.setStatus(status.value());
+        err.setError(error);
+        err.setMessage(Objects.requireNonNull(e.getValue()).toString());
+        err.setDate(Instant.now());
+
+        return ResponseEntity.status(status).body(this.err);
+    }
+
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
