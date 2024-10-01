@@ -18,6 +18,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -31,14 +32,17 @@ public class ZonaService {
     //
     private static final String VIACEP_URL = "https://viacep.com.br/ws/";
 
+    @Transactional(readOnly = true)
     public Collection<ZonaDTO> finaAll() {
         return zonaRepository.findAll().stream().map(zonaMapper::toDto).toList();
     }
 
+    @Transactional(readOnly = true)
     public ZonaDTO findById(String id) {
         return zonaMapper.toDto(zonaRepository.findById(id).orElseThrow(() -> new NotFoundException("Não foi possível encontrar a zona com o ID: " + id + ".")));
     }
 
+    @Transactional
     public ZonaDTO update(String id, ZonaPutAndPostDTO zona) {
         ZonaEntity zonaAtualiza;
 
@@ -60,7 +64,6 @@ public class ZonaService {
         LocalizacaoEntity localizacao = null;
         String cepFormatado = cep.trim().replaceAll("\\D", "");
 
-
         HttpGet request = new HttpGet(VIACEP_URL + cepFormatado + "/json/");
 
         try (CloseableHttpClient httpClient = HttpClientBuilder.create().disableRedirectHandling().build();
@@ -80,6 +83,7 @@ public class ZonaService {
         return localizacao;
     }
 
+    @Transactional
     public ZonaDTO save(ZonaPutAndPostDTO zonaPutAndPostDTO) {
         ZonaEntity zona = new ZonaEntity();
         //
@@ -92,6 +96,7 @@ public class ZonaService {
         return zonaMapper.toDto(zonaRepository.save(zonaMapper.toEntity(zonaMapper.toDto(zona))));
     }
 
+    @Transactional
     public void delete(String id) {
         zonaRepository.deleteById(id);
     }
