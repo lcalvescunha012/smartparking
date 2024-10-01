@@ -1,49 +1,38 @@
-version: '3.8'
-
 services:
-  # MongoDB service
   mongo:
-    image: mongo:latest
+    container_name: mongodb
+    image: mongo:7.0
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
-    ports:
-      - 27017:27017
+      MONGO_INITDB_DATABASE: smartparking
+    networks:
+      - smartparking-network
     volumes:
-      - mongo_data:/data/db
+      - smartparking-data:/data/db
     healthcheck:
-      test: "echo 'db.runCommand(\"ping\").ok' | mongo localhost:27017/test --quiet"
-      interval: 10s
-      timeout: 10s
-      retries: 5
+      test: ["CMD","mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
-  # Mongo Express service
-  mongo-express:
-    image: mongo-express
-    restart: always
-    ports:
-      - 8081:8081
-    environment:
-      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
-      - ME_CONFIG_MONGODB_ADMINPASSWORD=example
-      - ME_CONFIG_MONGODB_URL=mongodb://root:example@mongo:27017/?authSource=admin
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-      - ME_CONFIG_MONGODB_PORT=27017
-    depends_on:
-      - mongo
-
-  # Spring Boot API service
-  spring-api:
+  app:
+    container_name: smartparking
     build:
-      context: .  # Path to the Dockerfile
+      context: .
       dockerfile: Dockerfile
     ports:
-      - 8080:8080
-    environment:
-      SPRING_DATA_MONGODB_URI: mongodb://root:example@mongo:27017/smartparking?authSource=admin
+      - "8080:8080"
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
+    environment:
+      SPRING_DATA_MONGODB_URI: mongodb://mongo:27017/smartparking
+    networks:
+      - smartparking-network
 
 volumes:
-  mongo_data:
+  smartparking-data:
+
+networks:
+  smartparking-network:
