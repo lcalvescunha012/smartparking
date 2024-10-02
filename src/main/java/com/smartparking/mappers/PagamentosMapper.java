@@ -2,16 +2,10 @@ package com.smartparking.mappers;
 
 import com.smartparking.dto.PagamentosDTO;
 import com.smartparking.entities.PagamentosEntity;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
 
-@Component
-public class PagamentosMapper implements GenericMapper {
-
-    public PagamentosDTO toDto(PagamentosEntity entity){
-        return null;
-    }
-
-    public PagamentosEntity toEntity(PagamentosDTO dto){
-        return null;
-    }
+@Mapper(componentModel = "spring")
+public interface PagamentosMapper extends GenericMapper {
+    PagamentosDTO toDto(PagamentosEntity entity);
+    PagamentosEntity toEntity(PagamentosDTO dto);
 }

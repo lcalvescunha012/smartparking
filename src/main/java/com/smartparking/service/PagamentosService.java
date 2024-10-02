@@ -7,8 +7,8 @@ import com.smartparking.mappers.PagamentosMapper;
 import com.smartparking.repository.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,16 +21,14 @@ public class PagamentosService {
 
     @Transactional(readOnly = true)
     public PagamentosDTO findById(ObjectId id) {
-        return mapper.toDto(repository.findById(id).orElseThrow(() ->
-            new NotFoundException("error " + id + ".")
-        ));
+        return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("error " + id + ".")));
     }
 
     @Transactional(readOnly = true)
-    public Page<PagamentosDTO> getAllByPagination(int page, int size) {
+    public PagedModel<PagamentosDTO> getAllByPagination(int page, int size) {
         var pageRequest = PageRequest.of(page, size);
         var pageEntity = repository.findAll(pageRequest);
-        return pageEntity.map(mapper::toDto);
+        return new PagedModel<>(pageEntity.map(mapper::toDto));
     }
 
     @Transactional

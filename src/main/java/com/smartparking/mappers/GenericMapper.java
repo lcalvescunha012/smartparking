@@ -4,7 +4,6 @@ import com.smartparking.exceptions.InternalServerErrorException;
 
 import java.util.Arrays;
 
-
 public interface GenericMapper {
 
     /**
