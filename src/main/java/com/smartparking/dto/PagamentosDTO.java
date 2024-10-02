@@ -8,5 +8,8 @@ import java.time.LocalDateTime;
 public record PagamentosDTO(
     ObjectId id,
     BigDecimal valor,
-    LocalDateTime dataHora
+    LocalDateTime dataHora,
+    VeiculoDTO veiculo,
+    ParquimetroDTO parquimetro,
+    long version
 ){}

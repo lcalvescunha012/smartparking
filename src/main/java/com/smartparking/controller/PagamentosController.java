@@ -5,7 +5,7 @@ import com.smartparking.service.PagamentosService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
-import org.springframework.data.domain.Page;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,7 +20,7 @@ public class PagamentosController {
     private final PagamentosService service;
 
     @GetMapping
-    public ResponseEntity<Page<PagamentosDTO>> getAllByPagination(
+    public ResponseEntity<PagedModel<PagamentosDTO>> getAllByPagination(
             @RequestParam(defaultValue = "0")  int page,
             @RequestParam(defaultValue = "10") int size){
         return ResponseEntity.ok(service.getAllByPagination(page, size));
