@@ -1,6 +1,6 @@
 package com.smartparking.controller;
 
-import com.smartparking.dto.PagamentosDTO;
+import com.smartparking.dto.PagamentoDTO;
 import com.smartparking.entities.MessageErrorEntity;
 import com.smartparking.service.PagamentosService;
 import org.bson.types.ObjectId;
@@ -43,10 +43,10 @@ class PagamentosControllerTest {
     private PagamentosService service;
 
     @Autowired
-    private JacksonTester<PagedModel<PagamentosDTO>> pagedModelJacksonTester;
+    private JacksonTester<PagedModel<PagamentoDTO>> pagedModelJacksonTester;
 
     @Autowired
-    private JacksonTester<PagamentosDTO> pagamentosDTOJacksonTester;
+    private JacksonTester<PagamentoDTO> pagamentosDTOJacksonTester;
 
     @Autowired
     private JacksonTester<MessageErrorEntity> messageErrorEntityJacksonTester;
@@ -70,7 +70,7 @@ class PagamentosControllerTest {
 
     @ParameterizedTest
     @MethodSource
-    void findingByIdOkResults(ObjectId objId, String stringId, int expectedStatusCode, PagamentosDTO expectedBodyResponse) throws Exception {
+    void findingByIdOkResults(ObjectId objId, String stringId, int expectedStatusCode, PagamentoDTO expectedBodyResponse) throws Exception {
 
         var path = BASE_PATH + "/" + stringId;
 

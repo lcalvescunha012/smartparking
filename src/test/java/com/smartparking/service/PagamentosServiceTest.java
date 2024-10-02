@@ -1,7 +1,6 @@
 package com.smartparking.service;
 
-import com.google.gson.Gson;
-import com.smartparking.dto.PagamentosDTO;
+import com.smartparking.dto.PagamentoDTO;
 import com.smartparking.entities.PagamentosEntity;
 import com.smartparking.mappers.PagamentosMapper;
 import com.smartparking.repository.PagamentoRepository;
@@ -33,7 +32,7 @@ class PagamentosServiceTest {
     private PagamentosEntity entity;
 
     @Mock
-    private PagamentosDTO dto;
+    private PagamentoDTO dto;
 
     @InjectMocks
     private PagamentosService pagamentosService;

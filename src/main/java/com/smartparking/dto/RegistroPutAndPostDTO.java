@@ -2,6 +2,7 @@ package com.smartparking.dto;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record RegistroPutAndPostDTO(
@@ -9,5 +10,5 @@ public record RegistroPutAndPostDTO(
         @NotNull String parquimetroId,
         @NotNull LocalDateTime dataHoraInicio,
         LocalDateTime dataHoraFim,
-        double valorPago) {
+        BigDecimal valorPago) {
 }

@@ -1,6 +1,6 @@
 package com.smartparking.mappers;
 
-import com.smartparking.dto.PagamentosDTO;
+import com.smartparking.dto.PagamentoDTO;
 import com.smartparking.entities.PagamentosEntity;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -12,8 +12,8 @@ public class PagamentosMapper implements GenericMapper {
     private final ParquimetroMapper parquimetroMapper;
     private final VeiculoMapper veiculoMapper;
 
-    public PagamentosDTO toDto(PagamentosEntity entity) {
-        return new PagamentosDTO (
+    public PagamentoDTO toDto(PagamentosEntity entity) {
+        return new PagamentoDTO(
             entity.getId(),
             entity.getValor(),
             entity.getDataHora(),
@@ -23,7 +23,7 @@ public class PagamentosMapper implements GenericMapper {
         );
     }
 
-    public PagamentosEntity toEntity(PagamentosDTO dto) {
+    public PagamentosEntity toEntity(PagamentoDTO dto) {
         return new PagamentosEntity(
             dto.id(),
             dto.valor(),

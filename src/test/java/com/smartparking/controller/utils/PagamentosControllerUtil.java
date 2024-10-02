@@ -1,6 +1,6 @@
 package com.smartparking.controller.utils;
 
-import com.smartparking.dto.PagamentosDTO;
+import com.smartparking.dto.PagamentoDTO;
 import com.smartparking.entities.MessageErrorEntity;
 import lombok.experimental.UtilityClass;
 import org.bson.types.ObjectId;
@@ -17,10 +17,10 @@ import java.util.List;
 @UtilityClass
 public final class PagamentosControllerUtil {
 
-    public static PagedModel<PagamentosDTO> getPageModelPagamentosDTO() {
+    public static PagedModel<PagamentoDTO> getPageModelPagamentosDTO() {
 
         // Sample content
-        List<PagamentosDTO> content = Arrays.asList (
+        List<PagamentoDTO> content = Arrays.asList (
                 getPagamentosDTO( new ObjectId(), new BigDecimal("1000"), LocalDateTime.now().plusSeconds(100)),
                 getPagamentosDTO( new ObjectId(), new BigDecimal("2000"), LocalDateTime.now().plusSeconds(100)),
                 getPagamentosDTO( new ObjectId(), new BigDecimal("3000"), LocalDateTime.now().plusSeconds(100)),
@@ -33,12 +33,12 @@ public final class PagamentosControllerUtil {
         return new PagedModel<>(new PageImpl<>(content, PageRequest.of(0, 10), content.size()));
     }
 
-    public static PagamentosDTO getPagamentosDTO(ObjectId id, BigDecimal value, LocalDateTime time) {
-        return new PagamentosDTO( id, value, time, null, null, 0);
+    public static PagamentoDTO getPagamentosDTO(ObjectId id, BigDecimal value, LocalDateTime time) {
+        return new PagamentoDTO( id, value, time, null, null, 0L);
     }
 
-    public static PagamentosDTO getPagamentosDTO(String value) {
-        return new PagamentosDTO( new ObjectId(), new BigDecimal(value), LocalDateTime.now().plusSeconds(100), null, null, 0);
+    public static PagamentoDTO getPagamentosDTO(String value) {
+        return new PagamentoDTO( new ObjectId(), new BigDecimal(value), LocalDateTime.now().plusSeconds(100), null, null, 0L);
     }
 
     public static MessageErrorEntity messageErrorEntity (
