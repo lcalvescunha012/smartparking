@@ -1,8 +1,17 @@
-FROM openjdk:17
+# O código-fonte da aplicação é copiado para o diretório /app e o Maven é executado
+# para gerar o pacote (excluindo os testes para agilizar o processo de build).
+# Fase de Build
+FROM maven:eclipse-temurin AS build
 COPY src /app/src
 COPY pom.xml /app
 WORKDIR /app
 RUN mvn clean package -DskipTests
-COPY target/smartparking-0.0.1-SNAPSHOT.jar /app/smartparking-0.0.1-SNAPSHOT.jar
+
+# O arquivo JAR gerado na fase de build é copiado para o diretório /app e o container
+# é configurado para expor a porta 8080.
+FROM eclipse-temurin:21-jre-alpine
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+COPY --from=build /app/target/*.jar /app/app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "/app/smartparking-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","/app/app.jar"]
