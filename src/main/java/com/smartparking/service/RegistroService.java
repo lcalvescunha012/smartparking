@@ -40,10 +40,10 @@ public class RegistroService {
     public RegistroDTO iniciarFluxoDeRegistro(RegistroPutAndPostDTO registroDTO) {
         val parquimetroId = registroDTO.parquimetroId();
         val parquimetro = parquimetroRepository.findById(parquimetroId).orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + parquimetroId));
-        val statusParquimetro = parquimetro.getStatus();
+        val statusParquimetro = parquimetro.getStatus().toUpperCase();
         val registro = new RegistroEntity();
 
-        if(statusParquimetro.equals("Inativo")) {
+        if(statusParquimetro.equals("INATIVO")) {
             throw new ExpectationFailedException("O Parquimetro solicitado está inativo");
         }
         registro.setVeiculoId(registroDTO.veiculoId());

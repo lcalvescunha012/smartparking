@@ -2,6 +2,7 @@ package com.smartparking.service;
 
 import com.smartparking.dto.ParquimetroDTO;
 import com.smartparking.entities.ParquimetroEntity;
+import com.smartparking.exceptions.ExpectationFailedException;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.ParquimetroMapper;
 import com.smartparking.repository.ParquimetroRepository;
@@ -36,21 +37,31 @@ public class ParquimetroService {
         val parquimetroAtualizado = repository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + id));
 
-        parquimetroAtualizado.setParquimetroId(parquimetoDTO.parquimetroId());
         parquimetroAtualizado.setZonaId(parquimetoDTO.zonaId());
-        parquimetroAtualizado.setStatus(parquimetoDTO.status());
+        parquimetroAtualizado.setStatus(parquimetoDTO.status().toUpperCase());
+
+        validaStatus(parquimetoDTO);
 
         return parquimetroMapper.toDTO(repository.save(parquimetroAtualizado));
+    }
+
+    private static void validaStatus(ParquimetroDTO parquimetoDTO) {
+        if (parquimetoDTO.status().toUpperCase().compareTo("ATIVO") < 0
+                || parquimetoDTO.status().toUpperCase().compareTo("INATIVO") < 0 ) {
+            throw new ExpectationFailedException("Valor diferente de ATIVO/INATIVO.");
+        }
     }
 
     @Transactional
     public ParquimetroDTO save(ParquimetroDTO parquimetroDTO) {
         ParquimetroEntity parquimetro = new ParquimetroEntity();
 
-        parquimetro.setZonaId(parquimetroDTO.zonaId());
         parquimetro.setParquimetroId(parquimetroDTO.parquimetroId());
-        parquimetro.setStatus(parquimetroDTO.status());
+        parquimetro.setZonaId(parquimetroDTO.zonaId());
 
+        parquimetro.setStatus(parquimetroDTO.status().toUpperCase());
+
+        validaStatus(parquimetroDTO);
 
         return parquimetroMapper.toDTO(repository.save(parquimetro));
     }

@@ -5,7 +5,7 @@ import com.smartparking.entities.RegistroEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class RegistroPutAndPostMapper {
+public class RegistroPutAndPostMapper implements GenericMapper {
 
 
     public RegistroEntity toEntity(RegistroPutAndPostDTO registroPutAndPostDTO) {

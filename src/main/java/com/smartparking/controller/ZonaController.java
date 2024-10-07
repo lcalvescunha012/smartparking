@@ -1,7 +1,6 @@
 package com.smartparking.controller;
 
 import com.smartparking.dto.ZonaDTO;
-import com.smartparking.dto.ZonaPutAndPostDTO;
 import com.smartparking.service.ZonaService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -36,13 +35,13 @@ public class ZonaController {
 
     @Operation(description = "Cadastre uma nova zona.")
     @PostMapping
-    public ResponseEntity<ZonaDTO> save(@Valid @RequestBody ZonaPutAndPostDTO zonaDTO) {
+    public ResponseEntity<ZonaDTO> save(@Valid @RequestBody ZonaDTO zonaDTO) {
         return ResponseEntity.status(HttpStatusCode.valueOf(HttpStatus.CREATED.value())).body(zonaService.save(zonaDTO));
     }
 
     @Operation(description = "Atualize a zona cadastrada.")
     @PutMapping("/{id}")
-    public ResponseEntity<ZonaDTO> update(@PathVariable String id, @Valid @RequestBody ZonaPutAndPostDTO zonaDTO) {
+    public ResponseEntity<ZonaDTO> update(@PathVariable String id, @Valid @RequestBody ZonaDTO zonaDTO) {
         return ResponseEntity.ok(zonaService.update(id, zonaDTO));
     }
 

@@ -87,7 +87,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
         err.setStatus(status.value());
         err.setError(error);
-        err.setMessage(e.getMessage());
+        err.setMessage(e.getReason());
         err.setDate(Instant.now());
 
         return ResponseEntity.status(status).body(this.err);
