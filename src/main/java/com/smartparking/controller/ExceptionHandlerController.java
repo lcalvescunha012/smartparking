@@ -1,6 +1,7 @@
 package com.smartparking.controller;
 
 import com.smartparking.entities.MessageErrorEntity;
+import com.smartparking.exceptions.ExpectationFailedException;
 import com.smartparking.exceptions.InternalServerErrorException;
 import com.smartparking.exceptions.NotFoundException;
 import org.springframework.dao.OptimisticLockingFailureException;
@@ -69,6 +70,20 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
     public ResponseEntity<MessageErrorEntity> handleOptimisticLockingFailureException(OptimisticLockingFailureException e) {
         HttpStatus status = HttpStatus.CONFLICT;
         String error = "Erro de concorrencia. Outro usuário realizando operações nesse documento.";
+
+        err.setStatus(status.value());
+        err.setError(error);
+        err.setMessage(e.getMessage());
+        err.setDate(Instant.now());
+
+        return ResponseEntity.status(status).body(this.err);
+    }
+
+    @ResponseStatus(HttpStatus.EXPECTATION_FAILED)
+    @ExceptionHandler(ExpectationFailedException.class)
+    public ResponseEntity<MessageErrorEntity> handleExceptionFailedException(ExpectationFailedException e) {
+        HttpStatus status = HttpStatus.EXPECTATION_FAILED;
+        String error = "Erro na solicitação.";
 
         err.setStatus(status.value());
         err.setError(error);
