@@ -1,11 +1,9 @@
 package com.smartparking.service;
 
 import com.smartparking.dto.PagamentoDTO;
-import com.smartparking.dto.RegistroPutAndPostDTO;
-import com.smartparking.entities.RegistroEntity;
+import com.smartparking.dto.RegistroDTO;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.PagamentosMapper;
-import com.smartparking.mappers.VeiculoMapper;
 import com.smartparking.repository.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.bson.types.ObjectId;
@@ -40,8 +38,7 @@ public class PagamentosService {
     }
 
     @Transactional
-    public BigDecimal efetuarPagamento(RegistroPutAndPostDTO dto) {
-
+    public BigDecimal efetuarPagamento(RegistroDTO dto) {
         final LocalDateTime startTime = dto.dataHoraInicio();
         final LocalDateTime endTime = dto.dataHoraFim();
 
