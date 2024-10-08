@@ -1,12 +1,10 @@
 package com.smartparking.service;
 
 import com.smartparking.dto.RegistroDTO;
-import com.smartparking.dto.RegistroPutAndPostDTO;
 import com.smartparking.entities.RegistroEntity;
 import com.smartparking.exceptions.ExpectationFailedException;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.RegistroMapper;
-import com.smartparking.mappers.RegistroPutAndPostMapper;
 import com.smartparking.repository.ParquimetroRepository;
 import com.smartparking.repository.RegistroRepository;
 import lombok.RequiredArgsConstructor;
@@ -37,28 +35,29 @@ public class RegistroService {
     }
 
     @Transactional
-    public RegistroDTO iniciarFluxoDeRegistro(RegistroPutAndPostDTO registroDTO) {
+    public RegistroDTO iniciarFluxoDeRegistro(RegistroDTO registroDTO) {
         val parquimetroId = registroDTO.parquimetroId();
-        val parquimetro = parquimetroRepository.findById(parquimetroId).orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + parquimetroId));
-        val statusParquimetro = parquimetro.getStatus().toUpperCase();
-        val registro = new RegistroEntity();
+        val parquimetro = parquimetroRepository.findById(parquimetroId)
+                .orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + parquimetroId));
 
-        if(statusParquimetro.equals("INATIVO")) {
+        val statusParquimetro = parquimetro.getStatus().toUpperCase();
+        if (statusParquimetro.equals("INATIVO")) {
             throw new ExpectationFailedException("O Parquimetro solicitado está inativo");
         }
-        registro.setVeiculoId(registroDTO.veiculoId());
-        registro.setParquimetroId(registroDTO.parquimetroId());
-        registro.setDataHoraInicio(registroDTO.dataHoraInicio());
+
+        // Cria uma nova entidade de registro com os dados fornecidos no DTO
+        RegistroEntity registro = registroMapper.toEntity(registroDTO);
         return registroMapper.toDto(registroRepository.save(registro));
     }
 
     @Transactional
-    public RegistroDTO efetuarPagamento(String id, RegistroPutAndPostDTO registroDTO) {
-
-        var registroAtualizado = registroRepository.findById(id).orElseThrow(() -> new NotFoundException("Registro não encontrado com o ID: " + id));
+    public RegistroDTO efetuarPagamento(String id, RegistroDTO registroDTO) {
+        var registroAtualizado = registroRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Registro não encontrado com o ID: " + id));
 
         var valorPago = pagamentosService.efetuarPagamento(registroDTO);
 
+        // Atualiza a entidade com as informações de pagamento e data de fim
         registroAtualizado.setDataHoraFim(registroDTO.dataHoraFim());
         registroAtualizado.setValorPago(valorPago);
 

@@ -1,7 +1,6 @@
 package com.smartparking.controller;
 
 import com.smartparking.dto.RegistroDTO;
-import com.smartparking.dto.RegistroPutAndPostDTO;
 import com.smartparking.service.RegistroService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
@@ -35,13 +34,13 @@ public class RegistroController {
 
     @Operation(description = "Cria um novo registro de estacionamento.")
     @PostMapping
-    public ResponseEntity<RegistroDTO> iniciarFluxoDeRegistro(@Valid @RequestBody RegistroPutAndPostDTO registroDTO) {
+    public ResponseEntity<RegistroDTO> iniciarFluxoDeRegistro(@Valid @RequestBody RegistroDTO registroDTO) {
         return ResponseEntity.status(HttpStatus.CREATED).body(registroService.iniciarFluxoDeRegistro(registroDTO));
     }
 
     @Operation(description = "Atualiza o registro de estacionamento pelo ID.")
     @PutMapping("/{id}")
-    public ResponseEntity<RegistroDTO> efetuarPagamento(@PathVariable String id, @Valid @RequestBody RegistroPutAndPostDTO registroDTO) {
+    public ResponseEntity<RegistroDTO> efetuarPagamento(@PathVariable String id, @Valid @RequestBody RegistroDTO registroDTO) {
         return ResponseEntity.ok(registroService.efetuarPagamento(id, registroDTO));
     }
 

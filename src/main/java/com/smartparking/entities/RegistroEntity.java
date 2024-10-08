@@ -14,7 +14,8 @@ import java.time.LocalDateTime;
 @Data
 public class RegistroEntity {
 
-    public RegistroEntity(String veiculoId, String parquimetroId, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, BigDecimal valorPago) {
+    public RegistroEntity(String veiculoId, String parquimetroId, LocalDateTime dataHoraInicio,
+                          LocalDateTime dataHoraFim, BigDecimal valorPago) {
         this.veiculoId = veiculoId;
         this.parquimetroId = parquimetroId;
         this.dataHoraInicio = dataHoraInicio;
