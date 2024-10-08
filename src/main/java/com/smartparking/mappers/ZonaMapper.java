@@ -5,12 +5,13 @@ import com.smartparking.entities.ZonaEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ZonaMapper {
+public class ZonaMapper implements GenericMapper {
 
     public ZonaDTO toDto(ZonaEntity zonaEntity) {
         return new ZonaDTO(
                 zonaEntity.getIdZona(),
                 zonaEntity.getNome(),
+                zonaEntity.getLocalizacao().getCep(),
                 zonaEntity.getLocalizacao(),
                 zonaEntity.getVersion()
         );

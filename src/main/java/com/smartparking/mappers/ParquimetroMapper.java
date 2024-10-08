@@ -5,7 +5,7 @@ import com.smartparking.entities.ParquimetroEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ParquimetroMapper {
+public class ParquimetroMapper implements GenericMapper  {
 
     public ParquimetroDTO toDTO(ParquimetroEntity entity){
         return new ParquimetroDTO(

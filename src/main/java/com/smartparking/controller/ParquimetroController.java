@@ -17,6 +17,7 @@ import java.util.Collection;
 @RequestMapping("/v1/api/parquimetro")
 @RequiredArgsConstructor
 public class ParquimetroController {
+
     @NonNull
     private ParquimetroService parquimetroService;
 

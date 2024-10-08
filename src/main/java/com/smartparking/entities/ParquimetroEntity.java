@@ -14,9 +14,7 @@ public class ParquimetroEntity {
 
     @Id
     private String parquimetroId;
-
-    private ZonaEntity zonaId;
-
+    private String zonaId;
     private String status;
 
 }
