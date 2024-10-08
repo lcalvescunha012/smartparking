@@ -2,6 +2,7 @@ package com.smartparking.service;
 
 import com.smartparking.dto.ParquimetroDTO;
 import com.smartparking.entities.ParquimetroEntity;
+import com.smartparking.enums.ParquimetroStatus;
 import com.smartparking.exceptions.ExpectationFailedException;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.ParquimetroMapper;
@@ -45,9 +46,10 @@ public class ParquimetroService {
         return parquimetroMapper.toDTO(repository.save(parquimetroAtualizado));
     }
 
-    private static void validaStatus(ParquimetroDTO parquimetoDTO) {
-        if (parquimetoDTO.status().toUpperCase().compareTo("ATIVO") < 0
-                || parquimetoDTO.status().toUpperCase().compareTo("INATIVO") < 0 ) {
+    private void validaStatus(ParquimetroDTO parquimetoDTO) {
+        try{
+            ParquimetroStatus.valueOf(parquimetoDTO.status().toUpperCase());
+        }catch(Exception e){
             throw new ExpectationFailedException("Valor diferente de ATIVO/INATIVO.");
         }
     }

@@ -25,7 +25,10 @@ public class PagamentosController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PagamentoDTO> findById(@PathVariable ObjectId id) {
-        return ResponseEntity.ok(service.findById(id));
+    public ResponseEntity<PagamentoDTO> findById(@PathVariable String id) {
+
+        var objectId = new ObjectId(id);
+        System.out.println("Object id = " + objectId);
+        return ResponseEntity.ok(service.findById(objectId));
     }
 }
