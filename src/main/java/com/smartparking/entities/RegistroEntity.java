@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Version;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Document
@@ -13,13 +14,21 @@ import java.time.LocalDateTime;
 @Data
 public class RegistroEntity {
 
+    public RegistroEntity(String veiculoId, String parquimetroId, LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim, BigDecimal valorPago) {
+        this.veiculoId = veiculoId;
+        this.parquimetroId = parquimetroId;
+        this.dataHoraInicio = dataHoraInicio;
+        this.dataHoraFim = dataHoraFim;
+        this.valorPago = valorPago;
+    }
+
     @Id
     private String id;
     private String veiculoId;
     private String parquimetroId;
     private LocalDateTime dataHoraInicio;
     private LocalDateTime dataHoraFim;
-    private double valorPago;
+    private BigDecimal valorPago;
 
     @Version
     private Long version;

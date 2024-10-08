@@ -2,8 +2,10 @@ package com.smartparking.mappers;
 
 import com.smartparking.dto.RegistroDTO;
 import com.smartparking.entities.RegistroEntity;
+import org.springframework.stereotype.Component;
 
-public class RegistroMapper {
+@Component
+public class RegistroMapper implements GenericMapper  {
     public RegistroDTO toDto(RegistroEntity registroEntity) {
         return new RegistroDTO(
                 registroEntity.getId(),

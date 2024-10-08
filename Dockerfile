@@ -1,7 +1,7 @@
 # O código-fonte da aplicação é copiado para o diretório /app e o Maven é executado
 # para gerar o pacote (excluindo os testes para agilizar o processo de build).
 # Fase de Build
-FROM maven:3.9.9-eclipse-temurin-21-alpine AS build
+FROM maven:eclipse-temurin AS build
 COPY src /app/src
 COPY pom.xml /app
 WORKDIR /app

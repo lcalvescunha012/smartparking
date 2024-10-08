@@ -2,7 +2,6 @@ package com.smartparking.service;
 
 import com.google.gson.Gson;
 import com.smartparking.dto.ZonaDTO;
-import com.smartparking.dto.ZonaPutAndPostDTO;
 import com.smartparking.entities.LocalizacaoEntity;
 import com.smartparking.entities.ZonaEntity;
 import com.smartparking.exceptions.InternalServerErrorException;
@@ -43,7 +42,7 @@ public class ZonaService {
     }
 
     @Transactional
-    public ZonaDTO update(String id, ZonaPutAndPostDTO zona) {
+    public ZonaDTO update(String id, ZonaDTO zona) {
         ZonaEntity zonaAtualiza;
 
         //Procurando o valor no banco
@@ -84,7 +83,7 @@ public class ZonaService {
     }
 
     @Transactional
-    public ZonaDTO save(ZonaPutAndPostDTO zonaPutAndPostDTO) {
+    public ZonaDTO save(ZonaDTO zonaPutAndPostDTO) {
         ZonaEntity zona = new ZonaEntity();
         //
         LocalizacaoEntity localizacao = getLocalizacao(zonaPutAndPostDTO.cep());

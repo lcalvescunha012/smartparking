@@ -5,7 +5,7 @@ import com.smartparking.entities.VeiculoEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VeiculoMapper {
+public class VeiculoMapper implements GenericMapper  {
 
     public VeiculoDTO toDto(VeiculoEntity veiculoEntity) {
         return new VeiculoDTO(

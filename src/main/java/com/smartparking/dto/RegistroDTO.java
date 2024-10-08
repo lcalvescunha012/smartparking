@@ -1,8 +1,9 @@
 package com.smartparking.dto;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record RegistroDTO(String id, String veiculoId, String parquimetroId,
                           LocalDateTime dataHoraInicio, LocalDateTime dataHoraFim,
-                          double valorPago, Long version) {
+                          BigDecimal valorPago, Long version) {
 }
