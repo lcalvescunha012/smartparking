@@ -17,10 +17,12 @@ Caso não tenha o Docker instalado, acesse https://docs.docker.com/compose/insta
 
 Com o Docker instalado, siga os passos abaixo para subir o projeto:
 
-Navegue até o diretório do projeto.
-Execute o comando:
+1. Navegue até o diretório do projeto.
+2. Execute o comando:
+
 ``` shell script
 docker-compose up -d
 ```
+
 Após a execução, a aplicação estará disponível em http://localhost:8080.
 
