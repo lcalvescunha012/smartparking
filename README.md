@@ -2,10 +2,10 @@
 Este projeto é um sistema de controle de estacionamento que utiliza Spring Boot no back-end e MongoDB como banco de dados. A aplicação permite gerenciar zonas de estacionamento, controlar parquímetros, registrar veículos, processar pagamentos e monitorar o tempo de estacionamento.
 
 # Funcionalidades Principais:
-Gestão de Zonas de Estacionamento: Controle e configuração de diferentes áreas de estacionamento.
-Controle de Parquímetros: Gerenciamento e monitoramento do status dos parquímetros.
-Registro de Veículos: Cadastro e consulta de veículos estacionados.
-Pagamentos e Controle de Tempo: Processamento de pagamentos e acompanhamento do tempo de uso do estacionamento.
+* Gestão de Zonas de Estacionamento: Controle e configuração de diferentes áreas de estacionamento.
+* Controle de Parquímetros: Gerenciamento e monitoramento do status dos parquímetros.
+* Registro de Veículos: Cadastro e consulta de veículos estacionados.
+* Pagamentos e Controle de Tempo: Processamento de pagamentos e acompanhamento do tempo de uso do estacionamento.
 
 # Documentação da API:
 A documentação da API está disponível no Swagger, que pode ser acessada em:
