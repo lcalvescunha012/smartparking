@@ -16,5 +16,7 @@ public record RegistroDTO(
 
         // Opcional no POST, mas deve ser atualizado no PUT
         LocalDateTime dataHoraFim,
+
+        @ReadOnlyProperty
         BigDecimal valorPago
 ) {}
