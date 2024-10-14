@@ -20,6 +20,7 @@ public class RegistroMapper {
 
     public RegistroEntity toEntity(RegistroDTO registroDTO) {
         return new RegistroEntity(
+                registroDTO.id(),
                 registroDTO.veiculoId(),
                 registroDTO.parquimetroId(),
                 registroDTO.dataHoraInicio(),

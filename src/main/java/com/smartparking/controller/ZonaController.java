@@ -51,5 +51,4 @@ public class ZonaController {
         zonaService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }

@@ -6,6 +6,7 @@ import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.PagamentosMapper;
 import com.smartparking.repository.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.bson.types.ObjectId;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedModel;
@@ -14,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.Duration;
-import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -32,20 +32,14 @@ public class PagamentosService {
 
     @Transactional(readOnly = true)
     public PagedModel<PagamentoDTO> getAllByPagination(int page, int size) {
-        var pageRequest = PageRequest.of(page, size);
-        var pageEntity = repository.findAll(pageRequest);
+        val pageRequest = PageRequest.of(page, size);
+        val pageEntity = repository.findAll(pageRequest);
         return new PagedModel<>(pageEntity.map(mapper::toDto));
     }
 
     @Transactional
     public BigDecimal efetuarPagamento(RegistroDTO dto) {
-        final LocalDateTime startTime = dto.dataHoraInicio();
-        final LocalDateTime endTime = dto.dataHoraFim();
-
-        // Calculate the total duration in hours
-        final long totalHours = Duration.between(startTime, endTime).toHours();
-
-        // Cost calculation
+        val totalHours = Duration.between(dto.dataHoraInicio(), dto.dataHoraFim()).toHours();
         BigDecimal totalCost;
 
         if (totalHours <= 2) {
@@ -55,9 +49,9 @@ public class PagamentosService {
             totalCost = BigDecimal.valueOf(5).add(BigDecimal.valueOf((totalHours - 2) * 2));
         }
 
-        final var pagamentoDto = new PagamentoDTO (
+        val pagamentoDto = new PagamentoDTO (
             totalCost,
-            endTime,
+            dto.dataHoraFim(),
             veiculoService.findById(dto.veiculoId()),
             parquimetroService.findById(dto.parquimetroId())
         );

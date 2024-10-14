@@ -92,5 +92,4 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
         return ResponseEntity.status(status).body(this.err);
     }
-
 }

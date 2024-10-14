@@ -1,11 +1,11 @@
 package com.smartparking.service;
 
 import com.smartparking.dto.VeiculoDTO;
-import com.smartparking.entities.VeiculoEntity;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.VeiculoMapper;
 import com.smartparking.repository.VeiculoRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.val;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,16 +24,11 @@ public class VeiculoService {
 
     @Transactional(readOnly = true)
     public VeiculoDTO update(String placa, VeiculoDTO veiculo) {
-
-        VeiculoEntity veiculoAtualiza;
-
-        veiculoAtualiza = veiculoMapper.toEntity(findById(placa));
-
+        val veiculoAtualiza = veiculoMapper.toEntity(findById(placa));
         veiculoAtualiza.setMarca(veiculo.marca());
         veiculoAtualiza.setModelo(veiculo.modelo());
         veiculoAtualiza.setPlaca(veiculo.placa());
         veiculoAtualiza.setCor(veiculo.cor());
-
         return veiculoMapper.toDto(veiculoRepository.save(veiculoAtualiza));
     }
 

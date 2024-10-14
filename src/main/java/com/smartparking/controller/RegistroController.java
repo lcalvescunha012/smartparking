@@ -40,7 +40,13 @@ public class RegistroController {
 
     @Operation(description = "Atualiza o registro de estacionamento pelo ID.")
     @PutMapping("/{id}")
-    public ResponseEntity<RegistroDTO> efetuarPagamento(@PathVariable String id, @Valid @RequestBody RegistroDTO registroDTO) {
+    public ResponseEntity<RegistroDTO> efetuarPagamento(@PathVariable String id,
+                                                        @Valid @RequestBody RegistroDTO registroDTO) {
+        if (registroDTO.dataHoraFim() == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(null); // Retorna 400 se o campo for nulo
+        }
+
         return ResponseEntity.ok(registroService.efetuarPagamento(id, registroDTO));
     }
 

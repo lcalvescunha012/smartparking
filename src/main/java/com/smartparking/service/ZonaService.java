@@ -25,10 +25,11 @@ import java.util.Collection;
 @Service
 @RequiredArgsConstructor
 public class ZonaService {
+
     private final LocalizacaoRepository localizacaoRepository;
     private final ZonaRepository zonaRepository;
     private final ZonaMapper zonaMapper;
-    //
+
     private static final String VIACEP_URL = "https://viacep.com.br/ws/";
 
     @Transactional(readOnly = true)
@@ -99,6 +100,4 @@ public class ZonaService {
     public void delete(String id) {
         zonaRepository.deleteById(id);
     }
-
-
 }

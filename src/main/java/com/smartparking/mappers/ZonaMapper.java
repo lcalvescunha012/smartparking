@@ -12,8 +12,7 @@ public class ZonaMapper implements GenericMapper {
                 zonaEntity.getIdZona(),
                 zonaEntity.getNome(),
                 zonaEntity.getLocalizacao().getCep(),
-                zonaEntity.getLocalizacao(),
-                zonaEntity.getVersion()
+                zonaEntity.getLocalizacao()
         );
     }
 
@@ -21,8 +20,7 @@ public class ZonaMapper implements GenericMapper {
         return new ZonaEntity(
                 zonaDTO.idZona(),
                 zonaDTO.nome(),
-                zonaDTO.localizacao(),
-                zonaDTO.version()
+                zonaDTO.localizacao()
         );
     }
 }
