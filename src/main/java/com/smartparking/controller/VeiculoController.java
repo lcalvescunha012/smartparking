@@ -19,7 +19,6 @@ public class VeiculoController {
     @NonNull
     private final VeiculoService veiculoService;
 
-
     @Operation(description = "Retorna veículo cadastrado.")
     @GetMapping("/{placa}")
     public ResponseEntity<VeiculoDTO> findById(@PathVariable String placa) {

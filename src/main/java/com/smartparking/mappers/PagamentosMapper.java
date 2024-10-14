@@ -18,8 +18,7 @@ public class PagamentosMapper implements GenericMapper {
             entity.getValor(),
             entity.getDataHora(),
             veiculoMapper.toDto(entity.getVeiculoEntity()),
-            parquimetroMapper.toDTO(entity.getParquimetroEntity()),
-            entity.getVersion()
+            parquimetroMapper.toDTO(entity.getParquimetroEntity())
         );
     }
 
@@ -29,9 +28,7 @@ public class PagamentosMapper implements GenericMapper {
             dto.valor(),
             dto.dataHora(),
             veiculoMapper.toEntity(dto.veiculo()),
-            parquimetroMapper.toEntity(dto.parquimetro()),
-            dto.version()
+            parquimetroMapper.toEntity(dto.parquimetro())
         );
     }
-
 }

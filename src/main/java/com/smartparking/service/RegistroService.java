@@ -2,6 +2,7 @@ package com.smartparking.service;
 
 import com.smartparking.dto.RegistroDTO;
 import com.smartparking.entities.RegistroEntity;
+import com.smartparking.enums.ParquimetroStatus;
 import com.smartparking.exceptions.ExpectationFailedException;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.RegistroMapper;
@@ -40,8 +41,7 @@ public class RegistroService {
         val parquimetro = parquimetroRepository.findById(parquimetroId)
                 .orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + parquimetroId));
 
-        val statusParquimetro = parquimetro.getStatus().toUpperCase();
-        if (statusParquimetro.equals("INATIVO")) {
+        if (parquimetro.getStatus() == ParquimetroStatus.INATIVO) {
             throw new ExpectationFailedException("O Parquimetro solicitado está inativo");
         }
 
@@ -52,10 +52,10 @@ public class RegistroService {
 
     @Transactional
     public RegistroDTO efetuarPagamento(String id, RegistroDTO registroDTO) {
-        var registroAtualizado = registroRepository.findById(id)
+        val registroAtualizado = registroRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Registro não encontrado com o ID: " + id));
 
-        var valorPago = pagamentosService.efetuarPagamento(registroDTO);
+        val valorPago = pagamentosService.efetuarPagamento(registroDTO);
 
         // Atualiza a entidade com as informações de pagamento e data de fim
         registroAtualizado.setDataHoraFim(registroDTO.dataHoraFim());

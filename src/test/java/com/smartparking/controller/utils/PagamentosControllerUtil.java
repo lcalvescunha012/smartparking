@@ -34,11 +34,11 @@ public final class PagamentosControllerUtil {
     }
 
     public static PagamentoDTO getPagamentosDTO(ObjectId id, BigDecimal value, LocalDateTime time) {
-        return new PagamentoDTO( id, value, time, null, null, 0L);
+        return new PagamentoDTO( id, value, time, null, null);
     }
 
     public static PagamentoDTO getPagamentosDTO(String value) {
-        return new PagamentoDTO( new ObjectId(), new BigDecimal(value), LocalDateTime.now().plusSeconds(100), null, null, 0L);
+        return new PagamentoDTO( new ObjectId(), new BigDecimal(value), LocalDateTime.now().plusSeconds(100), null, null);
     }
 
     public static MessageErrorEntity messageErrorEntity (

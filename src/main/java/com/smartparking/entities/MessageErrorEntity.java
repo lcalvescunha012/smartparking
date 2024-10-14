@@ -12,8 +12,12 @@ import java.time.Instant;
 @NoArgsConstructor
 @Setter
 public class MessageErrorEntity {
+
     private String error;
+
     private Integer status;
+
     private String message;
+
     private Instant date;
 }

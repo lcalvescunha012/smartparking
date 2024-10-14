@@ -15,9 +15,10 @@ public class VeiculoEntity {
 
     @Id
     private String placa;
+
     private String marca;
+
     private String modelo;
+
     private String cor;
-
-
 }

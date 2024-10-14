@@ -5,5 +5,4 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface LocalizacaoRepository extends MongoRepository<LocalizacaoEntity, String> {
-}
+public interface LocalizacaoRepository extends MongoRepository<LocalizacaoEntity, String> {}
