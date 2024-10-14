@@ -2,14 +2,13 @@ package com.smartparking.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotNull;
-import org.bson.types.ObjectId;
 import org.hibernate.validator.constraints.NotBlank;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record RegistroDTO(
-        ObjectId id,
+        @Schema(readOnly = true) String id,
 
         @NotBlank(message = "A placa precisa estar preenchida.")
         @Schema(example = "ONP5133")
@@ -26,6 +25,7 @@ public record RegistroDTO(
         @Schema(example = "2024-10-13T12:00:00")
         LocalDateTime dataHoraFim,
 
-        @Schema(example = "15.50", nullable = true)
+        @Schema(example = "15.50", readOnly = true)
         BigDecimal valorPago
-) {}
+) {
+}

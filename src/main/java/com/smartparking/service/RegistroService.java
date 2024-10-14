@@ -2,7 +2,6 @@ package com.smartparking.service;
 
 import com.smartparking.dto.RegistroDTO;
 import com.smartparking.entities.RegistroEntity;
-import com.smartparking.enums.ParquimetroStatus;
 import com.smartparking.exceptions.ExpectationFailedException;
 import com.smartparking.exceptions.NotFoundException;
 import com.smartparking.mappers.RegistroMapper;
@@ -41,7 +40,8 @@ public class RegistroService {
         val parquimetro = parquimetroRepository.findById(parquimetroId)
                 .orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + parquimetroId));
 
-        if (parquimetro.getStatus() == ParquimetroStatus.INATIVO) {
+        val statusParquimetro = parquimetro.getStatus().toUpperCase();
+        if (statusParquimetro.equals("INATIVO")) {
             throw new ExpectationFailedException("O Parquimetro solicitado está inativo");
         }
 

@@ -1,7 +1,8 @@
 package com.smartparking.entities;
 
-import lombok.*;
-import org.bson.types.ObjectId;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 public class RegistroEntity {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private String veiculoId;
 

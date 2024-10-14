@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class PagamentosEntity {
 
     @Id
-    private ObjectId id;
+    private String id;
 
     private BigDecimal valor;
 

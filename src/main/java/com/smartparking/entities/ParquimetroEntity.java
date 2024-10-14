@@ -1,6 +1,5 @@
 package com.smartparking.entities;
 
-import com.smartparking.enums.ParquimetroStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +16,6 @@ public class ParquimetroEntity {
     private String parquimetroId;
 
     private String zonaId;
+    private String status;
 
-    private ParquimetroStatus status;
 }

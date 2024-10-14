@@ -38,7 +38,7 @@ public class RegistroController {
         return ResponseEntity.status(HttpStatus.CREATED).body(registroService.iniciarFluxoDeRegistro(registroDTO));
     }
 
-    @Operation(description = "Atualiza o registro de estacionamento pelo ID.")
+    @Operation(description = "Atualiza o registro e realiza o Pagamento do estacionamento pelo ID.")
     @PutMapping("/{id}")
     public ResponseEntity<RegistroDTO> efetuarPagamento(@PathVariable String id,
                                                         @Valid @RequestBody RegistroDTO registroDTO) {

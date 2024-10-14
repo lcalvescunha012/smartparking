@@ -39,17 +39,31 @@ public class ParquimetroService {
                 .orElseThrow(() -> new NotFoundException("Parquimetro não encontrado com o ID: " + id));
 
         parquimetroAtualizado.setZonaId(parquimetoDTO.zonaId());
-        parquimetroAtualizado.setStatus(parquimetoDTO.status());
+        parquimetroAtualizado.setStatus(parquimetoDTO.status().toUpperCase());
+
+        validaStatus(parquimetoDTO);
+
         return parquimetroMapper.toDTO(repository.save(parquimetroAtualizado));
     }
 
+    private void validaStatus(ParquimetroDTO parquimetoDTO) {
+        try {
+            ParquimetroStatus.valueOf(parquimetoDTO.status().toUpperCase());
+        } catch (Exception e) {
+            throw new ExpectationFailedException("Valor diferente de ATIVO/INATIVO.");
+        }
+    }
 
     @Transactional
     public ParquimetroDTO save(ParquimetroDTO parquimetroDTO) {
         val parquimetro = new ParquimetroEntity();
         parquimetro.setParquimetroId(parquimetroDTO.parquimetroId());
         parquimetro.setZonaId(parquimetroDTO.zonaId());
-        parquimetro.setStatus(parquimetroDTO.status());
+
+        parquimetro.setStatus(parquimetroDTO.status().toUpperCase());
+
+        validaStatus(parquimetroDTO);
+
         return parquimetroMapper.toDTO(repository.save(parquimetro));
     }
 
