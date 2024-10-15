@@ -4,7 +4,6 @@ import com.smartparking.dto.PagamentoDTO;
 import com.smartparking.service.PagamentosService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.bson.types.ObjectId;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +25,6 @@ public class PagamentosController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PagamentoDTO> findById(@PathVariable String id) {
-        return ResponseEntity.ok(service.findById(new ObjectId(id)));
+        return ResponseEntity.ok(service.findById(id));
     }
 }

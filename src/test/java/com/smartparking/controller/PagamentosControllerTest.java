@@ -70,7 +70,7 @@ class PagamentosControllerTest {
 
     @ParameterizedTest
     @MethodSource
-    void findingByIdOkResults(ObjectId objId, String stringId, int expectedStatusCode, PagamentoDTO expectedBodyResponse) throws Exception {
+    void findingByIdOkResults(String objId, String stringId, int expectedStatusCode, PagamentoDTO expectedBodyResponse) throws Exception {
 
         var path = BASE_PATH + "/" + stringId;
 
@@ -89,8 +89,8 @@ class PagamentosControllerTest {
 
     static Stream<Arguments> findingByIdOkResults() {
         return Stream.of (
-            Arguments.arguments(new ObjectId("64b7c3ecf2b3c82b8b4e91e8"), "64b7c3ecf2b3c82b8b4e91e8", 200,  getPagamentosDTO( "1000")),
-            Arguments.arguments(new ObjectId("507f191e810c19729de860ea"), "507f191e810c19729de860ea", 200,  getPagamentosDTO( "2000"))
+            Arguments.arguments("64b7c3ecf2b3c82b8b4e91e8", "64b7c3ecf2b3c82b8b4e91e8", 200,  getPagamentosDTO( "1000")),
+            Arguments.arguments("507f191e810c19729de860ea", "507f191e810c19729de860ea", 200,  getPagamentosDTO( "2000"))
         );
     }
 }

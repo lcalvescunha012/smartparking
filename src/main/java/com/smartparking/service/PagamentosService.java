@@ -7,7 +7,6 @@ import com.smartparking.mappers.PagamentosMapper;
 import com.smartparking.repository.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.val;
-import org.bson.types.ObjectId;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedModel;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class PagamentosService {
     private final VeiculoService veiculoService;
 
     @Transactional(readOnly = true)
-    public PagamentoDTO findById(ObjectId id) {
+    public PagamentoDTO findById(String id) {
         return mapper.toDto(repository.findById(id).orElseThrow(() -> new NotFoundException("error " + id + ".")));
     }
 
